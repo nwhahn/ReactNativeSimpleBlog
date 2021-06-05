@@ -10,12 +10,8 @@
 
  import React from 'react';
  import {
-	 FlatList,
    SafeAreaView,
-   ScrollView,
    StatusBar,
-   StyleSheet,
-   Text,
    useColorScheme,
    View,
  } from 'react-native';
@@ -23,23 +19,12 @@
 import styled from 'styled-components/native';
 import { Button } from './components/buttons';
 import { PostList } from './components/posts';
- import {
-   Colors,
-   DebugInstructions,
-   LearnMoreLinks,
-   ReloadInstructions,
- } from 'react-native/Libraries/NewAppScreen';
+import { Heading } from './components/typography';
 
  const AppWrapper = styled.View`
 	background-color: #76c3d6b3;
  	padding: 32px 48px;
 	height: 100%;
- `;
-
- const ContentWrapper = styled.View`
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
  `;
 
 const Header: React.FC<{}> = ({}) => {
@@ -58,14 +43,6 @@ const Header: React.FC<{}> = ({}) => {
 	</View>
  };
 
-
-const Heading = styled.Text`
-	text-align: center;
-	color: black;
-	font-size: 36px;
-	font-weight: bold;
-`;
-
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -81,24 +58,5 @@ const App = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-	sectionContainer: {
-		marginTop: 32,
-		paddingHorizontal: 24,
-	},
-	sectionTitle: {
-		fontSize: 24,
-		fontWeight: '600',
-	},
-	sectionDescription: {
-		marginTop: 8,
-		fontSize: 18,
-		fontWeight: '400',
-	},
-	highlight: {
-		fontWeight: '700',
-	},
-});
 
 export default App;
