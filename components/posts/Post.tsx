@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { Body} from '../typography';
+import { Body } from '../typography';
+import { ClickableIcon } from '../icons';
 
 export interface PostProps {
     id: number,
@@ -33,7 +34,18 @@ const ActionWrapper = styled.View`
     align-items: center;
 `;
 
+
 const Post: React.FC<PostProps> = ({ id, title, content}) => {
+
+    const [ edtModeEnabled, toggleEditing ] = useState(false);
+    
+    const deleteItem = () => {
+        console.warn(`delete ${id}`);
+    }
+
+    const triggerEdit = () => {
+        console.warn(`edit ${id}`);
+    }
 
     return <Wrapper>
         <TextWrapper>
@@ -41,8 +53,8 @@ const Post: React.FC<PostProps> = ({ id, title, content}) => {
             {content && <Body numberOfLines={2}>{content}</Body>}
         </TextWrapper>
         <ActionWrapper>
-            <Body>Hi</Body>
-            <Body>Hi</Body>
+            <ClickableIcon name={'create-outline'} onPress={() => toggleEditing(true)}/>
+            <ClickableIcon name={'trash-outline'} onPress={deleteItem}/>
         </ActionWrapper>
     </Wrapper>
 }
