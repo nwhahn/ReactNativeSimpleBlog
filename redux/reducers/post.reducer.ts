@@ -22,7 +22,7 @@ interface State {
 
 type Action = {
     type: string,
-    payload?: Post
+    payload?: any,
 
 };
 
@@ -62,6 +62,8 @@ export default function reducePosts(state = initialState , action: Action){
         case ActionTypes.post.create:
             return {
                 ...state,
+                editMode: false,
+                createMode: false,
                 posts: [
                     { 
                         id: Date.now(), // TODO better random number lol
@@ -84,6 +86,11 @@ export default function reducePosts(state = initialState , action: Action){
         case ActionTypes.post.edit:
             return {
                 ...state,
+                editMode: false,
+                createMode: false,
+                posts: state.posts.map(post => post.id === data.id ? {
+                    ...data
+                }: post )
             }
         default: 
          return state;

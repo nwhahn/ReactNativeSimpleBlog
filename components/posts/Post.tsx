@@ -51,7 +51,7 @@ const Post: React.FC<PostProps> = (post: PostProps) => {
     }
 
     const triggerEdit = () => {
-        dispatch({ type: ActionTypes.post.edit, payload: post})
+        dispatch({ type: ActionTypes.post.startEdit, payload: post})
     }
 
     return <Wrapper>
