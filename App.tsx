@@ -10,6 +10,7 @@
 
  import React from 'react';
  import {
+	 FlatList,
    SafeAreaView,
    ScrollView,
    StatusBar,
@@ -19,97 +20,112 @@
    View,
  } from 'react-native';
 
+import styled from 'styled-components/native';
+import { Button } from './components/buttons';
+import { PostList } from './components/posts';
  import {
    Colors,
    DebugInstructions,
-   Header,
    LearnMoreLinks,
    ReloadInstructions,
  } from 'react-native/Libraries/NewAppScreen';
 
- const Section: React.FC<{
-   title: string;
- }> = ({children, title}) => {
-   const isDarkMode = useColorScheme() === 'dark';
-   return (
-     <View style={styles.sectionContainer}>
-       <Text
-         style={[
-           styles.sectionTitle,
-           {
-             color: isDarkMode ? Colors.white : Colors.black,
-           },
-         ]}>
-         {title}
-       </Text>
-       <Text
-         style={[
-           styles.sectionDescription,
-           {
-             color: isDarkMode ? Colors.light : Colors.dark,
-           },
-         ]}>
-         {children}
-       </Text>
-     </View>
-   );
+ const AppWrapper = styled.View`
+	background-color: #76c3d6b3;
+ 	padding: 32px 48px;
+	height: 100%;
+ `;
+
+ const ContentWrapper = styled.View`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+ `;
+
+const Header: React.FC<{}> = ({}) => {
+  return <View>
+		<Button onPress={() => {}}>
+			Create Post
+		</Button>
+	</View>
  };
 
- const App = () => {
-   const isDarkMode = useColorScheme() === 'dark';
-
-   const backgroundStyle = {
-     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-   };
-
-   return (
-     <SafeAreaView style={backgroundStyle}>
-       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-       <ScrollView
-         contentInsetAdjustmentBehavior="automatic"
-         style={backgroundStyle}>
-         <Header />
-         <View
-           style={{
-             backgroundColor: isDarkMode ? Colors.black : Colors.white,
-           }}>
-           <Section title="Step One">
-             Edit <Text style={styles.highlight}>App.js</Text> to change this
-             screen and then come back to see your edits.
-           </Section>
-           <Section title="See Your Changes">
-             <ReloadInstructions />
-           </Section>
-           <Section title="Debug">
-             <DebugInstructions />
-           </Section>
-           <Section title="Learn More">
-             Read the docs to discover what to do next:
-           </Section>
-           <LearnMoreLinks />
-         </View>
-       </ScrollView>
-     </SafeAreaView>
-   );
+ const Footer: React.FC<{}>=({}) => {
+  return <View>
+		<Button onPress={() => {}}>
+			Delete all posts
+		</Button>
+	</View>
  };
 
- const styles = StyleSheet.create({
-   sectionContainer: {
-     marginTop: 32,
-     paddingHorizontal: 24,
-   },
-   sectionTitle: {
-     fontSize: 24,
-     fontWeight: '600',
-   },
-   sectionDescription: {
-     marginTop: 8,
-     fontSize: 18,
-     fontWeight: '400',
-   },
-   highlight: {
-     fontWeight: '700',
-   },
- });
 
- export default App;
+const Section: React.FC<{
+  title: string;
+}> = ({children, title}) => {
+  const isDarkMode = useColorScheme() === 'dark';
+  return (
+    <View style={styles.sectionContainer}>
+      <Text
+        style={[
+          styles.sectionTitle,
+          {
+            color: isDarkMode ? Colors.white : Colors.black,
+          },
+        ]}>
+        {title}
+			</Text>
+			<Text
+				style={[ styles.sectionDescription,
+					{
+						color: isDarkMode ? Colors.light : Colors.dark,
+					},
+      	]}>
+      {children}
+      </Text>
+    </View>
+  );
+};
+
+const Heading = styled.Text`
+	text-align: center;
+	color: black;
+	font-size: 36px;
+	font-weight: bold;
+`;
+
+const App = () => {
+  const isDarkMode = useColorScheme() === 'dark';
+
+	return (
+		<SafeAreaView>
+			<StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} backgroundColor={'#76c3d6b3'}/>
+			<AppWrapper>
+				<Heading>Demo</Heading>
+				<Header/>
+				<PostList />
+				<Footer/>
+      </AppWrapper>
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+	sectionContainer: {
+		marginTop: 32,
+		paddingHorizontal: 24,
+	},
+	sectionTitle: {
+		fontSize: 24,
+		fontWeight: '600',
+	},
+	sectionDescription: {
+		marginTop: 8,
+		fontSize: 18,
+		fontWeight: '400',
+	},
+	highlight: {
+		fontWeight: '700',
+	},
+});
+
+export default App;
