@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { Body } from '../typography';
 import { ClickableIcon } from '../icons';
+import { connect } from 'react-redux';
+import ActionTypes from '../../redux/actionTypes';
+import { useAppDispatch } from '../../redux/hooks';
+import { PlatformOSType } from 'react-native';
 
 export interface PostProps {
     id: number,
@@ -35,16 +39,19 @@ const ActionWrapper = styled.View`
 `;
 
 
-const Post: React.FC<PostProps> = ({ id, title, content}) => {
-
-    const [ edtModeEnabled, toggleEditing ] = useState(false);
-    
+const Post: React.FC<PostProps> = (post: PostProps) => {
+    const {
+        id, 
+        title, 
+        content
+    } = post;
+    const dispatch = useAppDispatch();    
     const deleteItem = () => {
-        console.warn(`delete ${id}`);
+        dispatch({ type: ActionTypes.post.delete, payload: post})
     }
 
     const triggerEdit = () => {
-        console.warn(`edit ${id}`);
+        dispatch({ type: ActionTypes.post.edit, payload: post})
     }
 
     return <Wrapper>
@@ -53,7 +60,7 @@ const Post: React.FC<PostProps> = ({ id, title, content}) => {
             {content && <Body numberOfLines={2}>{content}</Body>}
         </TextWrapper>
         <ActionWrapper>
-            <ClickableIcon name={'create-outline'} onPress={() => toggleEditing(true)}/>
+            <ClickableIcon name={'create-outline'} onPress={triggerEdit}/>
             <ClickableIcon name={'trash-outline'} onPress={deleteItem}/>
         </ActionWrapper>
     </Wrapper>
