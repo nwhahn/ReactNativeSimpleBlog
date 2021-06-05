@@ -31,7 +31,7 @@ const StyledBody = styled(Body)`
 
 const Button: React.FC<ButtonProps> = ({variant, children, onPress}) => 
 <ButtonWrapper variant={variant} onPress={onPress}>
-    <StyledBody>
+    <StyledBody large>
         {children}
     </StyledBody>
 </ButtonWrapper>
