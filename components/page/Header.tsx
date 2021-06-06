@@ -61,9 +61,9 @@ const Header: React.FC<{}> = ({}) => {
 
   // Dispatching cancel will set both of these modes sto false
   if (editMode || createMode) {
-
-		const missingFields: boolean = !title || !content;
-		const isDirty: boolean =  editMode && (target.title !== title || target.content !== content);
+    const missingFields: boolean = !title || !content;
+    const isDirty: boolean =
+      editMode && (target.title !== title || target.content !== content);
 
     return (
       <Wrapper>
@@ -84,7 +84,7 @@ const Header: React.FC<{}> = ({}) => {
           <Button
             onPress={editMode ? update : create}
             variant="secondary"
-						// In edit mode  we have to check if the fields have changed , otherwise just stop inpiut if you try to add no data
+            // In edit mode  we have to check if the fields have changed , otherwise just stop inpiut if you try to add no data
             disabled={editMode ? !isDirty || missingFields : missingFields}>
             {editMode ? 'Update' : 'Create'}
           </Button>
