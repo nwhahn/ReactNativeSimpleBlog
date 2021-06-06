@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import { Body } from '../typography';
 import { ClickableIcon } from '../icons';
-import { connect } from 'react-redux';
 import ActionTypes from '../../redux/actionTypes';
 import { useAppDispatch } from '../../redux/hooks';
-import { PlatformOSType } from 'react-native';
 
 export interface PostProps {
-    id: number,
+    id: string,
     title?: string,
     content?: string,
 }
@@ -40,11 +38,7 @@ const ActionWrapper = styled.View`
 
 
 const Post: React.FC<PostProps> = (post: PostProps) => {
-    const {
-        id, 
-        title, 
-        content
-    } = post;
+    const { title, content } = post;
     const dispatch = useAppDispatch();    
     const deleteItem = () => {
         dispatch({ type: ActionTypes.post.delete, payload: post})

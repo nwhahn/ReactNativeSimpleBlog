@@ -1,12 +1,10 @@
 import ActionTypes from '../actionTypes';
-import defaultPosts  from '../../initialContent';
-import { statement } from '@babel/template';
-
-
+import defaultPosts  from '../../initialContent.json';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface Post {
     
-    id: number,
+    id: string,
 
     title?: string,
     
@@ -29,7 +27,7 @@ type Action = {
 
 
 const initialState: State = {
-    posts: defaultPosts,
+    posts: defaultPosts.map(({ title = '', content = ''}) => ({title, content, id: uuidv4()})),
     editMode: false,
     createMode: false,
 }
@@ -66,7 +64,7 @@ export default function reducePosts(state = initialState , action: Action){
                 createMode: false,
                 posts: [
                     { 
-                        id: Date.now(), // TODO better random number lol
+                        id: uuidv4(),
                         content: data?.content,
                         title: data?.title,
                     },
