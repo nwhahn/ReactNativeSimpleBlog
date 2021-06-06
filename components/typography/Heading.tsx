@@ -1,19 +1,16 @@
 import styled from 'styled-components/native';
 
 interface BodyProps {
-
-    children: string
+  children: string;
 }
 
 const BodyText = styled.Text<BodyProps>`
-    text-align: center;
-	color: black;
-	font-size: 36px;
-	font-weight: bold;
+  text-align: center;
+  color: black;
+  font-size: 36px;
+  font-weight: bold;
 `;
 
-BodyText.defaultProps = {
-
-}
+BodyText.defaultProps = {};
 
 export default BodyText;
