@@ -39,6 +39,7 @@ export default function reducePosts(state = initialState, action: Action) {
   const data = action.payload;
   switch (action.type) {
     case ActionTypes.post.cancel:
+      // Clear all edit states and revert to previous state
       return {
         ...state,
         target: undefined,
@@ -48,6 +49,7 @@ export default function reducePosts(state = initialState, action: Action) {
     case ActionTypes.post.startCreate:
       return {
         ...state,
+        // Turn on create mode and make sure editing doesnt occur at same time
         editMode: false,
         createMode: true,
         target: data,
@@ -55,15 +57,20 @@ export default function reducePosts(state = initialState, action: Action) {
     case ActionTypes.post.startEdit:
       return {
         ...state,
+        // Enter Edit mode
         editMode: true,
         createMode: false,
+        // Set post in the payload to the current target
+        // This will allow the app to know what to edit
         target: data,
       };
     case ActionTypes.post.create:
       return {
         ...state,
+        // Make sure we turn off edit + create mode once a succcessful create is fired
         editMode: false,
         createMode: false,
+        // Create a new post with params and add a unique id to it
         posts: [
           {
             id: uuidv4(),
@@ -88,14 +95,16 @@ export default function reducePosts(state = initialState, action: Action) {
     case ActionTypes.post.deleteAll:
       return {
         ...state,
-        posts: [],
+        posts: [], // Clear all the posts
       };
     case ActionTypes.post.edit:
       return {
         ...state,
+        // Edit mode should be cancelled and the target cleared when a edit is fired
         editMode: false,
         createMode: false,
         target: undefined,
+        // Find updated post, edit it and return new array in state
         posts: state.posts.map(post =>
           post.id === data.id
             ? {
