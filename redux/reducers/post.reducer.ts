@@ -95,6 +95,7 @@ export default function reducePosts(state = initialState, action: Action) {
         ...state,
         editMode: false,
         createMode: false,
+        target: undefined,
         posts: state.posts.map(post =>
           post.id === data.id
             ? {
