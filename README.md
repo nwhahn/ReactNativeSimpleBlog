@@ -4,7 +4,7 @@ A basic Blog post app to exercise React Native and Redux patterns. Also utilizes
 
 The app is prepopulated with content from the `initialContent.json` file.
 
-![ Demo](http://www.giphy.com/gifs/CvFB6B0fvz3FaFZiex) / ! [](http://www.giphy.com/gifs/CvFB6B0fvz3FaFZiex)
+![](http://www.giphy.com/gifs/CvFB6B0fvz3FaFZiex)
 
 To run use:
 
